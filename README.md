@@ -1,7 +1,7 @@
 # ❄️ Advent of Code ❄️
 
-Solving 2022 Advent of Code (https://adventofcode.com/)
-Day 1, 2, 3 solved with python one-liners
+Solving 2022 Advent of Code 🎄 (https://adventofcode.com/)
+Days 1, 2 and 3 solved with python one-liners
 
 ## Day 1
 
