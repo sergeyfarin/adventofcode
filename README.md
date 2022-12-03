@@ -1,4 +1,4 @@
-# ❄️ Advent of Code ❄️
+# ❄️ Advent of Code 2022 ❄️
 
 Solving 2022 Advent of Code 🎄 (https://adventofcode.com/)
 Days 1, 2 and 3 solved with python one-liners
