@@ -93,7 +93,31 @@ print(sum([sum(map(lambda i: ord(i)-96 if ord(i)>96 else ord(i)-64+26, set(g[0])
     70
     
 
+## Day 4
+
 
 ```python
-
+day04_input = """2-4,6-8
+2-3,4-5
+5-7,7-9
+2-8,3-7
+6-6,4-6
+2-6,4-8"""
 ```
+
+
+```python
+print(len(list(filter(lambda x: ((x[0]>=x[2] and x[1]<=x[3]) or (x[2]>=x[0] and x[3]<=x[1])), [[int(y) for y in pair.replace(',','-').split("-")] for pair in day04_input.split("\n")]))))
+```
+
+    2
+    
+
+
+```python
+print(len(list(filter(lambda x: ((x[0]>=x[2] and x[0]<=x[3]) or (x[1]>=x[2] and x[1]<=x[3]) or (x[2]>=x[0] and x[2]<=x[1]) or (x[3]>=x[0] and x[3]<=x[1])), [[int(y) for y in pair.replace(',','-').split("-")] for pair in day04_input.split("\n")]))))
+```
+
+    4
+    
+
