@@ -121,3 +121,47 @@ print(len(list(filter(lambda x: ((x[0]>=x[2] and x[0]<=x[3]) or (x[1]>=x[2] and 
     4
     
 
+## Day 5
+
+
+```python
+day05_input = """    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2"""
+```
+
+
+```python
+from functools import reduce
+
+# First line of "one-liner solution" to get last elements of each stack
+reduce(lambda c, d: c+d[-1], 
+       # Second line performs rearrangements of stacks ("crane operations"), reduce function takes as arguments: 1) function (this line)
+       reduce(lambda a,b: [a[i][:-b[0]] if i==b[1]-1 else a[i]+a[b[1]-1][:-b[0]-1:-1] if i==b[2]-1 else a[i] for i, s in enumerate(a)], 
+              # Next line prepares array of crane actions, each line with 3 numbers
+              [[int(line.split()[0]), int(line.split()[1]), int(line.split()[2])] for line in day05_input.split('\n\n')[1].replace('move ','').replace(' from ',' ').replace(' to ',' ').split('\n')], 
+              # Next line prepares initial array of stacks in a format [['Z', 'N'], ['M', 'C', 'D'], ['P']]
+              [list(filter(lambda x: x!=' ', [line[i*4+1] for line in day05_input.split('\n\n')[0].split('\n')[:-1]][::-1])) for i in range(len(day05_input.split('\n')[0][1::4]))]),
+       '')
+```
+
+    CMZ
+
+
+```python
+reduce(lambda c, d: c+d[-1], 
+       reduce(lambda a,b: [a[i][:-b[0]] if i==b[1]-1 else a[i]+a[b[1]-1][-b[0]:] if i==b[2]-1 else a[i] for i, s in enumerate(a)], 
+              [[int(line.split()[0]), int(line.split()[1]), int(line.split()[2])] for line in day05_input.split('\n\n')[1].replace('move ','').replace(' from ',' ').replace(' to ',' ').split('\n')], 
+              [list(filter(lambda x: x!=' ', [line[i*4+1] for line in day05_input.split('\n\n')[0].split('\n')[:-1]][::-1])) for i in range(len(day05_input.split('\n')[0][1::4]))]),
+       '')
+```
+
+    MCD
+
+
