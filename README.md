@@ -165,3 +165,31 @@ reduce(lambda c, d: c+d[-1],
     MCD
 
 
+## Day 6
+
+
+```python
+day06_input = """nppdvjthqldpwncqszvftbrmjlhg"""
+```
+
+
+```python
+[1 if ((c!=day06_input[i+1]) and 
+       (c!=day06_input[i+2]) and 
+       (c!=day06_input[i+3]) and 
+       (day06_input[i+1]!=day06_input[i+2]) and 
+       (day06_input[i+1]!=day06_input[i+3]) and
+       (day06_input[i+2]!=day06_input[i+3])) else 0 for i, c in enumerate(day06_input[:-3])].index(1)+4
+```
+
+    6
+
+
+```python
+[sum([1 if c2 in day06_input[i+i2+1:i+14] else 0 for i2, c2 in enumerate(day06_input[i:i+14])]) for i, c in enumerate(day06_input[:-13])].index(0)+14
+```
+
+    23
+
+
+## Day 7
