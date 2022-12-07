@@ -193,3 +193,52 @@ day06_input = """nppdvjthqldpwncqszvftbrmjlhg"""
 
 
 ## Day 7
+
+
+```python
+day07_input = """$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k"""
+```
+
+
+```python
+from functools import reduce
+sum([
+    reduce(lambda a, b: [a[0], 0] if a[1]==0 else [a[0], a[1]-1] if "$ cd .." in b else [a[0], a[1]+1] if "$ cd " in b else ([0, 0] if a[0]+int(b.split()[0])>100000 else [a[0]+int(b.split()[0]), a[1]]) if not (b[0] in "d$") else [a[0], a[1]], day07_input.split("\n")[i+1:], [0, 1])[0]
+    if not "$ cd .." in c and "$ cd " in c else 0 for i, c in enumerate(day07_input.split("\n")[:-1])])
+```
+
+    95437
+
+
+```python
+reduce(lambda e, f: e if f==0 else e if f[1]<(30000000 - (70000000 - sum([int(d.split()[0]) if not d[0] in "d$" else 0 for d in day07_input.split("\n")[1:]]))) else e if f[1]>e[1] else f,
+       [[c[5:], reduce(lambda a, b: [a[0], 0] if a[1]==0 else [a[0], a[1]-1] if "$ cd .." in b else [a[0], a[1]+1] if "$ cd " in b else [a[0]+int(b.split()[0]), a[1]] if not (b[0] in "d$") else [a[0], a[1]], day07_input.split("\n")[i+1:], [0, 1])[0]]
+        if not "$ cd .." in c and "$ cd " in c else 0 for i, c in enumerate(day07_input.split("\n")[:-1])])[1]
+```
+
+    24933642
+
+
+## Day 8
