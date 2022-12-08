@@ -242,3 +242,42 @@ reduce(lambda e, f: e if f==0 else e if f[1]<(30000000 - (70000000 - sum([int(d.
 
 
 ## Day 8
+
+
+```python
+day08_input = """30373
+25512
+65332
+33549
+35390"""
+```
+
+
+```python
+from functools import reduce
+reduce(lambda a, b: [a[0], a[1]+(1 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-1 or b[1]==len(a[0][0])-1 else 
+                                 1 if a[0][b[0]][b[1]]>max(a[0][b[0]][:b[1]]) or a[0][b[0]][b[1]]>max(a[0][b[0]][b[1]+1:]) or 
+                                 a[0][b[0]][b[1]]>max([c[b[1]] for c in a[0][:b[0]]]) or 
+                                 a[0][b[0]][b[1]]>max([c[b[1]] for c in a[0][b[0]+1:]]) else 0)],
+       [(i,j) for i,a in enumerate(day08_input.split("\n"))  for j,b in enumerate(a)],
+       [[[int(b) for j,b in enumerate(a)] for i,a in enumerate(day08_input.split("\n"))], 0])[1]
+```
+
+    21
+
+
+```python
+from functools import reduce
+reduce(lambda a, b: [a[0], max(a[1], 0 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-1 or b[1]==len(a[0][0])-1 else 
+                                     reduce(lambda c, d: c if c[1]==1 else [c[0]+1, 0] if a[0][b[0]][b[1]]>d else [c[0]+1, 1], a[0][b[0]][b[1]-1::-1] ,[0,0])[0]*
+                                     reduce(lambda c, d: c if c[1]==1 else [c[0]+1, 0] if a[0][b[0]][b[1]]>d else [c[0]+1, 1], a[0][b[0]][b[1]+1:] ,[0,0])[0]*
+                                     reduce(lambda c, d: c if c[1]==1 else [c[0]+1, 0] if a[0][b[0]][b[1]]>d else [c[0]+1, 1], [d[b[1]] for d in a[0][b[0]-1::-1]] ,[0,0])[0]*
+                                     reduce(lambda c, d: c if c[1]==1 else [c[0]+1, 0] if a[0][b[0]][b[1]]>d else [c[0]+1, 1], [d[b[1]] for d in a[0][b[0]+1:]] ,[0,0])[0])],
+       [(i,j) for i,a in enumerate(day08_input.split("\n"))  for j,b in enumerate(a)],
+       [[[int(b) for j,b in enumerate(a)] for i,a in enumerate(day08_input.split("\n"))], 0])[1]
+```
+
+    8
+
+
+## Day 9
