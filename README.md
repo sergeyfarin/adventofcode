@@ -281,3 +281,59 @@ reduce(lambda a, b: [a[0], max(a[1], 0 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-
 
 
 ## Day 9
+
+
+```day09_input = """R 4
+U 4
+L 3
+D 1
+R 4
+D 1
+L 5
+R 2"""
+```
+
+
+```python
+from functools import reduce
+len(reduce(lambda a, b: 
+  reduce(lambda c, d: [[c[0][0]+(1 if d=='R' else -1 if d=='L' else 0), c[0][1]+(1 if d=='U' else -1 if d=='D' else 0)], 
+                       c[1] if d!='T' or (abs(c[0][0]-c[1][0])<=1 and abs(c[0][1]-c[1][1])==1) or (abs(c[0][0]-c[1][0])==1 and abs(c[0][1]-c[1][1])<=1) else 
+                       [c[1][0]+(1 if c[0][0]>c[1][0] else -1), c[1][1]+(1 if c[0][1]>c[1][1] else -1)] if (abs(c[0][0]-c[1][0])>0 and abs(c[0][1]-c[1][1])>0) else 
+                       [c[1][0]+(1 if c[0][0]>c[1][0] else -1 if c[0][0]<c[1][0] else 0), c[1][1]+(1 if c[0][1]>c[1][1] else -1 if c[0][1]<c[1][1] else 0)],
+                       c[2] if c[1] in c[2] else c[2]+[c[1]]], 
+         (b.split()[0]+'T')*int(b.split()[1]), a), day09_input.split("\n")+['F 1'], [[0, 0], [0, 0], [[0, 0]]])[2])
+```
+
+    13
+
+
+```day09_input = """R 5
+U 8
+L 8
+D 3
+R 17
+D 10
+L 25
+U 20"""
+```
+
+
+```python
+from functools import reduce
+len(
+  reduce(lambda a, b: 
+    reduce(lambda c, d: 
+      reduce(lambda e, f: [[[e[0][0][0]+(0 if f>0 else 1 if d=='R' else -1 if d=='L' else 0), e[0][0][1]+(0 if f>0 else 1 if d=='U' else -1 if d=='D' else 0)]]+
+                           [e[0][i] if i!=f or (abs(e[0][i-1][0]-e[0][i][0])<=1 and abs(e[0][i-1][1]-e[0][i][1])==1) or (abs(e[0][i-1][0]-e[0][i][0])==1 and abs(e[0][i-1][1]-e[0][i][1])<=1) else 
+                            [e[0][i][0]+(1 if e[0][i-1][0]>e[0][i][0] else -1), e[0][i][1]+(1 if e[0][i-1][1]>e[0][i][1] else -1)] if (abs(e[0][i-1][0]-e[0][i][0])>0 and abs(e[0][i-1][1]-e[0][i][1])>0) else 
+                            [e[0][i][0]+(1 if e[0][i-1][0]>e[0][i][0] else -1 if e[0][i-1][0]<e[0][i][0] else 0), e[0][i][1]+(1 if e[0][i-1][1]>e[0][i][1] else -1 if e[0][i-1][1]<e[0][i][1] else 0)]
+                            for i in range(1, 10)],
+                           e[1] if e[0][9] in e[1] else e[1]+[e[0][9]]], range(10), c), 
+      (b.split()[0])*int(b.split()[1]), a), day09_input.split("\n")+['F 1'], [[[0, 0]]*10, [[0, 0]]])[1])
+```
+
+    36
+
+
+## Day 10
