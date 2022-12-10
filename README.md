@@ -283,7 +283,8 @@ reduce(lambda a, b: [a[0], max(a[1], 0 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-
 ## Day 9
 
 
-```day09_input = """R 4
+```python
+day09_input = """R 4
 U 4
 L 3
 D 1
@@ -308,7 +309,8 @@ len(reduce(lambda a, b:
     13
 
 
-```day09_input = """R 5
+```python
+day09_input = """R 5
 U 8
 L 8
 D 3
@@ -334,6 +336,352 @@ len(
 ```
 
     36
+
+
+## Day 10
+
+
+```python
+day10_input = """addx 15
+addx -11
+addx 6
+addx -3
+addx 5
+addx -1
+addx -8
+addx 13
+addx 4
+noop
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx 5
+addx -1
+addx -35
+addx 1
+addx 24
+addx -19
+addx 1
+addx 16
+addx -11
+noop
+noop
+addx 21
+addx -15
+noop
+noop
+addx -3
+addx 9
+addx 1
+addx -3
+addx 8
+addx 1
+addx 5
+noop
+noop
+noop
+noop
+noop
+addx -36
+noop
+addx 1
+addx 7
+noop
+noop
+noop
+addx 2
+addx 6
+noop
+noop
+noop
+noop
+noop
+addx 1
+noop
+noop
+addx 7
+addx 1
+noop
+addx -13
+addx 13
+addx 7
+noop
+addx 1
+addx -33
+noop
+noop
+noop
+addx 2
+noop
+noop
+noop
+addx 8
+noop
+addx -1
+addx 2
+addx 1
+noop
+addx 17
+addx -9
+addx 1
+addx 1
+addx -3
+addx 11
+noop
+noop
+addx 1
+noop
+addx 1
+noop
+noop
+addx -13
+addx -19
+addx 1
+addx 3
+addx 26
+addx -30
+addx 12
+addx -1
+addx 3
+addx 1
+noop
+noop
+noop
+addx -9
+addx 18
+addx 1
+addx 2
+noop
+noop
+addx 9
+noop
+noop
+noop
+addx -1
+addx 2
+addx -37
+addx 1
+addx 3
+noop
+addx 15
+addx -21
+addx 22
+addx -6
+addx 1
+noop
+addx 2
+addx 1
+noop
+addx -10
+noop
+noop
+addx 20
+addx 1
+addx 2
+addx 2
+addx -6
+addx -11
+noop
+noop
+noop"""
+```
+
+
+```python
+from functools import reduce
+reduce(lambda a, b: [
+  a[0]+(1 if b[:4]=="noop" else 2 if b[:4]=="addx" else 0),
+  a[1]+(0 if b[:4]=="noop" else int(b.split()[1]) if b[:4]=="addx" else 0),
+  a[2]+((a[0]+1)*a[1] if (a[0]+21)%40==0 else (a[0]+2)*a[1] if ((a[0]+22)%40==0 and b[:4]=="addx") else 0)
+  ] ,day10_input.split("\n"), [0, 1, 0])[2]
+```
+
+    13140
+
+
+```python
+from functools import reduce
+print(reduce(lambda a, b: [
+  a[0]+(1 if b[:4]=="noop" else 2 if b[:4]=="addx" else 0),
+  a[1]+(0 if b[:4]=="noop" else int(b.split()[1]) if b[:4]=="addx" else 0),
+  a[2]+("#" if abs((a[0])%40-a[1])<=1 else ".")+("\n" if (a[0]+1)%40==0 else "")+
+  (("#" if abs((a[0]+1)%40-a[1])<=1 else ".")+("\n" if (a[0]+2)%40==0 else "") if b[:4]=="addx" else "")
+  ] ,day10_input.split("\n"), [0, 1, ""])[2])
+```
+
+    ##..##..##..##..##..##..##..##..##..##..
+    ###...###...###...###...###...###...###.
+    ####....####....####....####....####....
+    #####.....#####.....#####.....#####.....
+    ######......######......######......####
+    #######.......#######.......#######.....
+
+
+```python
+real_day10_input = """addx 2
+addx 15
+addx -11
+addx 6
+noop
+noop
+noop
+addx -1
+addx 5
+addx -1
+addx 5
+noop
+noop
+noop
+noop
+noop
+addx 7
+addx -1
+addx 3
+addx 1
+addx 5
+addx 1
+noop
+addx -38
+noop
+addx 1
+addx 6
+addx 3
+noop
+addx -8
+noop
+addx 13
+addx 2
+addx 3
+addx -2
+addx 2
+noop
+addx 3
+addx 9
+addx -2
+addx 2
+addx -10
+addx 11
+addx 2
+addx -14
+addx -21
+addx 2
+noop
+addx 5
+addx 29
+addx -2
+noop
+addx -19
+noop
+addx 2
+addx 11
+addx -10
+addx 2
+addx 5
+addx -9
+noop
+addx 14
+addx 2
+addx 3
+addx -2
+addx 3
+addx 1
+noop
+addx -37
+noop
+addx 13
+addx -8
+noop
+noop
+noop
+noop
+addx 13
+addx -5
+addx 3
+addx 3
+addx 3
+noop
+noop
+noop
+noop
+noop
+noop
+noop
+addx 6
+addx 3
+addx 1
+addx 5
+addx -15
+addx 5
+addx -27
+addx 30
+addx -23
+addx 33
+addx -32
+addx 2
+addx 5
+addx 2
+addx -16
+addx 17
+addx 2
+addx -10
+addx 17
+addx 10
+addx -9
+addx 2
+addx 2
+addx 5
+addx -29
+addx -8
+noop
+noop
+noop
+addx 19
+addx -11
+addx -1
+addx 6
+noop
+noop
+addx -1
+addx 3
+noop
+addx 3
+addx 2
+addx -3
+addx 11
+addx -1
+addx 5
+addx -2
+addx 5
+addx 2
+noop
+noop
+addx 1
+noop
+noop"""
+```
+
+
+```python
+from functools import reduce
+print(reduce(lambda a, b: [
+  a[0]+(1 if b[:4]=="noop" else 2 if b[:4]=="addx" else 0),
+  a[1]+(0 if b[:4]=="noop" else int(b.split()[1]) if b[:4]=="addx" else 0),
+  a[2]+("#" if abs((a[0])%40-a[1])<=1 else ".")+("\n" if (a[0]+1)%40==0 else "")+
+  (("#" if abs((a[0]+1)%40-a[1])<=1 else ".")+("\n" if (a[0]+2)%40==0 else "") if b[:4]=="addx" else "")
+  ] ,real_day10_input.split("\n"), [0, 1, ""])[2])
+```
+
+
+    ####..##....##..##..###....##.###..####.
+    #....#..#....#.#..#.#..#....#.#..#.#....
+    ###..#.......#.#..#.#..#....#.#..#.###..
+    #....#.......#.####.###.....#.###..#....
+    #....#..#.#..#.#..#.#....#..#.#.#..#....
+    #.....##...##..#..#.#.....##..#..#.####.
 
 
 ## Day 10
