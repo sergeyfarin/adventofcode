@@ -685,3 +685,121 @@ print(reduce(lambda a, b: [
 
 
 ## Day 11
+
+
+```python
+day11_input = """Monkey 0:
+  Starting items: 79, 98
+  Operation: new = old * 19
+  Test: divisible by 23
+    If true: throw to monkey 2
+    If false: throw to monkey 3
+
+Monkey 1:
+  Starting items: 54, 65, 75, 74
+  Operation: new = old + 6
+  Test: divisible by 19
+    If true: throw to monkey 2
+    If false: throw to monkey 0
+
+Monkey 2:
+  Starting items: 79, 60, 97
+  Operation: new = old * old
+  Test: divisible by 13
+    If true: throw to monkey 1
+    If false: throw to monkey 3
+
+Monkey 3:
+  Starting items: 74
+  Operation: new = old + 3
+  Test: divisible by 17
+    If true: throw to monkey 0
+    If false: throw to monkey 1"""
+```
+
+
+```python
+from functools import reduce
+(lambda z: (z[0])*(z[1]))(sorted([j[6] for j in 
+  reduce(lambda a, b: 
+    reduce(lambda c, d: 
+      # c,
+      reduce(lambda e, f: 
+        [
+          [i[0],
+          ([i[1][0]] if i[0]!=d[0] and len(i[1])>0 else [])+
+          (i[1][1:] if len(i[1])>1 else [])+
+          ([] if len(e[d[0]][1])==0 else (
+            [(lambda x, y: x+y if d[2][1]=='+' else x*y if d[2][1]=='*' else 999)(
+              e[d[0]][1][0] if d[2][0]=='old' else int(d[2][0]), 
+              e[d[0]][1][0] if d[2][2]=='old' else int(d[2][2]))//3] if i[0]==(
+            d[4] if (lambda x, y: x+y if d[2][1]=='+' else x*y if d[2][1]=='*' else 999)(
+              e[d[0]][1][0] if d[2][0]=='old' else int(d[2][0]), 
+              e[d[0]][1][0] if d[2][2]=='old' else int(d[2][2]))//3%d[3]==0
+            else d[5]) else [])),
+          i[2],
+          i[3],
+          i[4],
+          i[5],
+          i[6]+(1 if i[0]==d[0] and len(i[1])>0 else 0)
+          ] for i in e
+        ]
+        , c[d[0]][1], c),
+      a, a),
+    range(20),
+    [[int(m.replace(":"," ").split()[1]),
+    [int(i) for i in m.split("\n")[1].replace(",","").split()[2:]], 
+    m.split("\n")[2].split()[3:],
+    int(m.split("\n")[3].split()[3]), 
+    int(m.split("\n")[4].split()[5]),
+    int(m.split("\n")[5].split()[5]),
+    0] for m in day11_input.split("\n\n")])])[-2:])
+```
+
+
+    10605
+
+
+```python
+from functools import reduce
+(lambda z: (z[0])*(z[1]))(sorted([j[6] for j in 
+  reduce(lambda a, b: 
+    reduce(lambda c, d: 
+      # c,
+      reduce(lambda e, f: 
+        [
+          [i[0],
+          ([i[1][0]] if i[0]!=d[0] and len(i[1])>0 else [])+
+          (i[1][1:] if len(i[1])>1 else [])+
+          ([] if len(e[d[0]][1])==0 else (
+            [(lambda x, y: x+y if d[2][1]=='+' else x*y%(reduce(lambda g, h: g*h, [j[3] for j in c])) if d[2][1]=='*' else 999)(
+              e[d[0]][1][0] if d[2][0]=='old' else int(d[2][0]), 
+              e[d[0]][1][0] if d[2][2]=='old' else int(d[2][2]))] if i[0]==(
+            d[4] if (lambda x, y: x+y if d[2][1]=='+' else x*y if d[2][1]=='*' else 999)(
+              e[d[0]][1][0] if d[2][0]=='old' else int(d[2][0]), 
+              e[d[0]][1][0] if d[2][2]=='old' else int(d[2][2]))%d[3]==0
+            else d[5]) else [])),
+          i[2],
+          i[3],
+          i[4],
+          i[5],
+          i[6]+(1 if i[0]==d[0] and len(i[1])>0 else 0)
+          ] for i in e
+        ]
+        , c[d[0]][1], c),
+      a, a),
+    range(10000),
+    [[int(m.replace(":"," ").split()[1]),
+    [int(i) for i in m.split("\n")[1].replace(",","").split()[2:]], 
+    m.split("\n")[2].split()[3:],
+    int(m.split("\n")[3].split()[3]), 
+    int(m.split("\n")[4].split()[5]),
+    int(m.split("\n")[5].split()[5]),
+    0] for m in day11_input.split("\n\n")])])[-2:])
+```
+
+
+    2713310158
+
+
+## Day 12
