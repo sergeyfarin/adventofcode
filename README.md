@@ -805,7 +805,7 @@ from functools import reduce
 ## Day 12
 
 
-Day 12 - could not solve with one-liner.
+Not a one-liner solution
 
 
 ```python
