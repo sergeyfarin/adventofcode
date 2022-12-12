@@ -803,3 +803,68 @@ from functools import reduce
 
 
 ## Day 12
+
+
+Day 12 - could not solve with one-liner.
+
+
+```python
+day12_input = """Sabqponm
+abcryxxl
+accszExk
+acctuvwj
+abdefghi"""
+```
+
+
+```python
+Arr = [[c for c in l] for l in day12_input.replace('S','a').split('\n')]
+S = day12_input.find('S')//(len(day12_input.split('\n')[0])+1), day12_input.find('S')%(len(day12_input.split('\n')[0])+1)
+E = day12_input.find('E')//(len(day12_input.split('\n')[0])+1), day12_input.find('E')%(len(day12_input.split('\n')[0])+1)
+stack=[S, [-1,-1]]
+for i,j in stack:
+  if i!=-1:
+    for k, l in [[i-1, j], [i+1, j], [i, j-1], [i, j+1]]:
+      if k>=0 and l>=0 and k<len(Arr) and l<len(Arr[0]):
+        if Arr[k][l]=='E' and ord(Arr[i][j])>=ord('y'):
+          print(stack[:stack.index([i, j])].count([-1,-1])+1)
+          break
+        elif ord(Arr[k][l])<=(ord(Arr[i][j])+1) and not [k,l] in stack:
+          stack+=[[k,l]]
+    else:
+      continue
+    break
+  else: 
+    stack+=[[-1, -1]]
+```
+
+
+  31
+
+
+```python
+Arr = [[c for c in l] for l in day12_input.replace('E','z').replace('S','a').split('\n')]
+S = day12_input.find('S')//(len(day12_input.split('\n')[0])+1), day12_input.find('S')%(len(day12_input.split('\n')[0])+1)
+E = day12_input.find('E')//(len(day12_input.split('\n')[0])+1), day12_input.find('E')%(len(day12_input.split('\n')[0])+1)
+stack=[E, [-1, -1]]
+for i, j in stack:
+  if i!=-1:
+    for k, l in [[i-1, j], [i+1, j], [i, j-1], [i, j+1]]:
+      if k>=0 and l>=0 and k<len(Arr) and l<len(Arr[0]):
+        if Arr[k][l]=='a' and ord(Arr[i][j])<=ord('b'):
+          print(stack[:stack.index([i, j])].count([-1,-1])+1)
+          break
+        elif ord(Arr[k][l])>=(ord(Arr[i][j])-1) and not [k,l] in stack:
+          stack+=[[k,l]]
+    else:
+      continue
+    break
+  else:
+    stack+=[[-1, -1]]  
+```
+
+
+  29
+
+
+## Day 13
