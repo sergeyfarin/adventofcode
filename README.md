@@ -868,3 +868,109 @@ for i, j in stack:
 
 
 ## Day 13
+
+
+Not a one-liner solution
+
+
+```python
+day13_input = """[1,1,3,1,1]
+[1,1,5,1,1]
+
+[[1],[2,3,4]]
+[[1],4]
+
+[9]
+[[8,7,6]]
+
+[[4,4],4,4]
+[[4,4],4,4,4]
+
+[7,7,7,7]
+[7,7,7]
+
+[]
+[3]
+
+[[[]]]
+[[]]
+
+[1,[2,[3,[4,[5,6,7]]]],8,9]
+[1,[2,[3,[4,[5,6,0]]]],8,9]"""
+```
+
+
+```python
+count = 0
+for i, l in enumerate([[[int(k) if not k in '[]' else k for k in j.split()] for j in i.split('\n')] for i in day13_input.replace('[','[ ').replace(']',' ] ').replace(',',' ').split("\n\n")]):
+        s1 = l[0]
+        s2 = l[1]
+        for j in range(max(len(s1), len(s2))*3):
+                if s1[j]==s2[j]: continue
+                if s2[j]==']':
+                        break
+                if s1[j]==']':
+                        count+=i+1
+                        break
+                if s2[j]=='[':
+                        s1=s1[:j]+['[']+[s1[j]]+[']']+s1[j+1:]
+                        continue
+                if s1[j]=='[':
+                        s2=s2[:j]+['[']+[s2[j]]+[']']+s2[j+1:]
+                        continue
+                if s1[j]>s2[j]:
+                        break
+                if s1[j]<s2[j]:
+                        count+=i+1
+                        break
+                raise Exception("Unknown case", s1[j], s2[j])
+print(count)
+```
+
+
+  13
+
+
+```python
+count = 0
+list = [[int(k) if not k in '[]' else k for k in i.split()] for i in (day13_input+'\n[[2]]\n[[6]]').replace('[','[ ').replace(']',' ] ').replace(',',' ').replace('\n\n','\n').split("\n")]
+for i in range(len(list)-1):
+  s1 = list[i]
+  for k in range(i+1,len(list)):
+    s2 = list[k]
+    for j in range(max(len(s1), len(s2))*3):
+      if s1[j]==s2[j]: continue
+      if s2[j]==']':
+              list[i], list[k] = list[k], list[i]
+              s1 = list[i]
+              s2 = list[k]
+              break
+      if s1[j]==']':
+              break
+      if s2[j]=='[':
+              s1=s1[:j]+['[']+[s1[j]]+[']']+s1[j+1:]
+              continue
+      if s1[j]=='[':
+              s2=s2[:j]+['[']+[s2[j]]+[']']+s2[j+1:]
+              continue
+      if s1[j]>s2[j]:
+              list[i], list[k] = list[k], list[i]
+              s1 = list[i]
+              s2 = list[k]
+              break
+      if s1[j]<s2[j]:
+              break
+      raise Exception("Unknown case", s1[j], s2[j])
+print((list.index(['[', '[', 2, ']', ']'])+1)*(list.index(['[', '[', 6, ']', ']'])+1))
+```
+
+
+  140
+
+
+## Day 14
+
+
+
+
+
