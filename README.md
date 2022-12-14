@@ -1,11 +1,10 @@
 # ❄️ Advent of Code 2022 ❄️
 
-Solving 2022 Advent of Code 🎄 (https://adventofcode.com/)
+Solving 2022 Advent of Code 🎄 <https://adventofcode.com/>
 
 Days 1, 2 and 3 solved with python one-liners
 
 ## Day 1
-
 
 ```python
 day01_input = """1000
@@ -24,24 +23,19 @@ day01_input = """1000
 10000"""
 ```
 
-
 ```python
 print(max([sum([int(y) if y!="" else 0 for y in x.split("\n")]) for x in day01_input.split("\n\n")]))
 ```
 
-    24000
-    
-
+  24000
 
 ```python
 print(sum(sorted([sum([int(y) if y!="" else 0 for y in x.split("\n")]) for x in day01_input.split("\n\n")])[-3:]))
 ```
 
-    45000
-    
+  45000
 
 ## Day 2
-
 
 ```python
 day02_input = """A Y
@@ -49,24 +43,19 @@ B X
 C Z"""
 ```
 
-
 ```python
 print(sum([(ord(x[2])-87+(6 if ord(x[2])-ord(x[0])==24 or ord(x[2])-ord(x[0])==21 else 3 if ord(x[2])-ord(x[0])==23 else 0)) for x in day02_input.split("\n")]))
 ```
 
-    15
-    
-
+  15
 
 ```python
 print(sum([((ord(x[2])-88)*3+(ord(x[0])-65+ord(x[2])-89)%3+1) for x in day02_input.split("\n")]))
 ```
 
-    12
-    
+  12
 
 ## Day 3
-
 
 ```python
 day03_input = """vJrwpWtwJgWrhcsFMMfFFhFp
@@ -77,24 +66,19 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"""
 ```
 
-
 ```python
 print(sum([sum([ord(i)-96 if ord(i)>96 else ord(i)-64+26 for i in set(r[:(len(r)//2)]).intersection(r[(len(r)//2):])]) for r in day03_input.split("\n")]))
 ```
 
-    157
-    
-
+  157
 
 ```python
 print(sum([sum(map(lambda i: ord(i)-96 if ord(i)>96 else ord(i)-64+26, set(g[0]).intersection(g[1]).intersection(g[2]))) for g in [day03_input.split("\n")[i:i+3] for i in range(0, len(day03_input.split("\n")), 3)]]))
 ```
 
-    70
-    
+  70
 
 ## Day 4
-
 
 ```python
 day04_input = """2-4,6-8
@@ -105,24 +89,19 @@ day04_input = """2-4,6-8
 2-6,4-8"""
 ```
 
-
 ```python
 print(len(list(filter(lambda x: ((x[0]>=x[2] and x[1]<=x[3]) or (x[2]>=x[0] and x[3]<=x[1])), [[int(y) for y in pair.replace(',','-').split("-")] for pair in day04_input.split("\n")]))))
 ```
 
-    2
-    
-
+  2
 
 ```python
 print(len(list(filter(lambda x: ((x[0]>=x[2] and x[0]<=x[3]) or (x[1]>=x[2] and x[1]<=x[3]) or (x[2]>=x[0] and x[2]<=x[1]) or (x[3]>=x[0] and x[3]<=x[1])), [[int(y) for y in pair.replace(',','-').split("-")] for pair in day04_input.split("\n")]))))
 ```
 
-    4
-    
+  4
 
 ## Day 5
-
 
 ```python
 day05_input = """    [D]    
@@ -135,7 +114,6 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2"""
 ```
-
 
 ```python
 from functools import reduce
@@ -151,8 +129,7 @@ reduce(lambda c, d: c+d[-1],
        '')
 ```
 
-    CMZ
-
+  CMZ
 
 ```python
 reduce(lambda c, d: c+d[-1], 
@@ -162,16 +139,13 @@ reduce(lambda c, d: c+d[-1],
        '')
 ```
 
-    MCD
-
+  MCD
 
 ## Day 6
-
 
 ```python
 day06_input = """nppdvjthqldpwncqszvftbrmjlhg"""
 ```
-
 
 ```python
 [1 if ((c!=day06_input[i+1]) and 
@@ -182,18 +156,15 @@ day06_input = """nppdvjthqldpwncqszvftbrmjlhg"""
        (day06_input[i+2]!=day06_input[i+3])) else 0 for i, c in enumerate(day06_input[:-3])].index(1)+4
 ```
 
-    6
-
+  6
 
 ```python
 [sum([1 if c2 in day06_input[i+i2+1:i+14] else 0 for i2, c2 in enumerate(day06_input[i:i+14])]) for i, c in enumerate(day06_input[:-13])].index(0)+14
 ```
 
-    23
-
+  23
 
 ## Day 7
-
 
 ```python
 day07_input = """$ cd /
@@ -221,7 +192,6 @@ $ ls
 7214296 k"""
 ```
 
-
 ```python
 from functools import reduce
 sum([
@@ -229,8 +199,7 @@ sum([
     if not "$ cd .." in c and "$ cd " in c else 0 for i, c in enumerate(day07_input.split("\n")[:-1])])
 ```
 
-    95437
-
+  95437
 
 ```python
 reduce(lambda e, f: e if f==0 else e if f[1]<(30000000 - (70000000 - sum([int(d.split()[0]) if not d[0] in "d$" else 0 for d in day07_input.split("\n")[1:]]))) else e if f[1]>e[1] else f,
@@ -238,11 +207,9 @@ reduce(lambda e, f: e if f==0 else e if f[1]<(30000000 - (70000000 - sum([int(d.
         if not "$ cd .." in c and "$ cd " in c else 0 for i, c in enumerate(day07_input.split("\n")[:-1])])[1]
 ```
 
-    24933642
-
+  24933642
 
 ## Day 8
-
 
 ```python
 day08_input = """30373
@@ -251,7 +218,6 @@ day08_input = """30373
 33549
 35390"""
 ```
-
 
 ```python
 from functools import reduce
@@ -263,8 +229,7 @@ reduce(lambda a, b: [a[0], a[1]+(1 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-1 or
        [[[int(b) for j,b in enumerate(a)] for i,a in enumerate(day08_input.split("\n"))], 0])[1]
 ```
 
-    21
-
+  21
 
 ```python
 from functools import reduce
@@ -277,11 +242,9 @@ reduce(lambda a, b: [a[0], max(a[1], 0 if b[0]==0 or b[1]==0 or b[0]==len(a[0])-
        [[[int(b) for j,b in enumerate(a)] for i,a in enumerate(day08_input.split("\n"))], 0])[1]
 ```
 
-    8
-
+  8
 
 ## Day 9
-
 
 ```python
 day09_input = """R 4
@@ -294,7 +257,6 @@ L 5
 R 2"""
 ```
 
-
 ```python
 from functools import reduce
 len(reduce(lambda a, b: 
@@ -306,8 +268,7 @@ len(reduce(lambda a, b:
          (b.split()[0]+'T')*int(b.split()[1]), a), day09_input.split("\n")+['F 1'], [[0, 0], [0, 0], [[0, 0]]])[2])
 ```
 
-    13
-
+  13
 
 ```python
 day09_input = """R 5
@@ -319,7 +280,6 @@ D 10
 L 25
 U 20"""
 ```
-
 
 ```python
 from functools import reduce
@@ -335,11 +295,9 @@ len(
       (b.split()[0])*int(b.split()[1]), a), day09_input.split("\n")+['F 1'], [[[0, 0]]*10, [[0, 0]]])[1])
 ```
 
-    36
-
+  36
 
 ## Day 10
-
 
 ```python
 day10_input = """addx 15
@@ -490,7 +448,6 @@ noop
 noop"""
 ```
 
-
 ```python
 from functools import reduce
 reduce(lambda a, b: [
@@ -500,8 +457,7 @@ reduce(lambda a, b: [
   ] ,day10_input.split("\n"), [0, 1, 0])[2]
 ```
 
-    13140
-
+  13140
 
 ```python
 from functools import reduce
@@ -513,13 +469,12 @@ print(reduce(lambda a, b: [
   ] ,day10_input.split("\n"), [0, 1, ""])[2])
 ```
 
-    ##..##..##..##..##..##..##..##..##..##..
-    ###...###...###...###...###...###...###.
-    ####....####....####....####....####....
-    #####.....#####.....#####.....#####.....
-    ######......######......######......####
-    #######.......#######.......#######.....
-
+  ##..##..##..##..##..##..##..##..##..##..
+  ###...###...###...###...###...###...###.
+  ####....####....####....####....####....
+  #####.....#####.....#####.....#####.....
+  ######......######......######......####
+  #######.......#######.......#######.....
 
 ```python
 real_day10_input = """addx 2
@@ -664,7 +619,6 @@ noop
 noop"""
 ```
 
-
 ```python
 from functools import reduce
 print(reduce(lambda a, b: [
@@ -675,17 +629,14 @@ print(reduce(lambda a, b: [
   ] ,real_day10_input.split("\n"), [0, 1, ""])[2])
 ```
 
-
-    ####..##....##..##..###....##.###..####.
-    #....#..#....#.#..#.#..#....#.#..#.#....
-    ###..#.......#.#..#.#..#....#.#..#.###..
-    #....#.......#.####.###.....#.###..#....
-    #....#..#.#..#.#..#.#....#..#.#.#..#....
-    #.....##...##..#..#.#.....##..#..#.####.
-
+  ####..##....##..##..###....##.###..####.
+  #....#..#....#.#..#.#..#....#.#..#.#....
+  ###..#.......#.#..#.#..#....#.#..#.###..
+  #....#.......#.####.###.....#.###..#....
+  #....#..#.#..#.#..#.#....#..#.#.#..#....
+  #.....##...##..#..#.#.....##..#..#.####.
 
 ## Day 11
-
 
 ```python
 day11_input = """Monkey 0:
@@ -716,7 +667,6 @@ Monkey 3:
     If true: throw to monkey 0
     If false: throw to monkey 1"""
 ```
-
 
 ```python
 from functools import reduce
@@ -756,9 +706,7 @@ from functools import reduce
     0] for m in day11_input.split("\n\n")])])[-2:])
 ```
 
-
-    10605
-
+  10605
 
 ```python
 from functools import reduce
@@ -798,15 +746,11 @@ from functools import reduce
     0] for m in day11_input.split("\n\n")])])[-2:])
 ```
 
-
-    2713310158
-
+  2713310158
 
 ## Day 12
 
-
 Not a one-liner solution
-
 
 ```python
 day12_input = """Sabqponm
@@ -815,7 +759,6 @@ accszExk
 acctuvwj
 abdefghi"""
 ```
-
 
 ```python
 Arr = [[c for c in l] for l in day12_input.replace('S','a').split('\n')]
@@ -838,9 +781,7 @@ for i,j in stack:
     stack+=[[-1, -1]]
 ```
 
-
   31
-
 
 ```python
 Arr = [[c for c in l] for l in day12_input.replace('E','z').replace('S','a').split('\n')]
@@ -863,15 +804,11 @@ for i, j in stack:
     stack+=[[-1, -1]]  
 ```
 
-
   29
-
 
 ## Day 13
 
-
 Not a one-liner solution
-
 
 ```python
 day13_input = """[1,1,3,1,1]
@@ -898,7 +835,6 @@ day13_input = """[1,1,3,1,1]
 [1,[2,[3,[4,[5,6,7]]]],8,9]
 [1,[2,[3,[4,[5,6,0]]]],8,9]"""
 ```
-
 
 ```python
 count = 0
@@ -927,9 +863,7 @@ for i, l in enumerate([[[int(k) if not k in '[]' else k for k in j.split()] for 
 print(count)
 ```
 
-
   13
-
 
 ```python
 count = 0
@@ -964,13 +898,128 @@ for i in range(len(list)-1):
 print((list.index(['[', '[', 2, ']', ']'])+1)*(list.index(['[', '[', 6, ']', ']'])+1))
 ```
 
-
   140
-
 
 ## Day 14
 
+```python
+day14_input = """498,4 -> 498,6 -> 496,6
+503,4 -> 502,4 -> 502,9 -> 494,9"""
+```
 
+```python
+xmin, xmax, ymin, ymax = [
+  min([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[::2]])-1,
+  max([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[::2]])+2,
+  0,
+  max([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[1::2]])+2]
+Arr = [''.join(['.' for x in range(xmax-xmin)]) for y in range(ymax-ymin)]
+for l in day14_input.split('\n'):
+  coords = [[int(c.split(',')[0])-xmin, int(c.split(',')[1])-ymin] for c in l.replace('-','').replace('>','').split()]
+  x0, y0 = coords[0]
+  for x1, y1 in coords[1:]:
+    for x in range(min(x0,x1), max(x0,x1)+1):
+      for y in range(min(y0,y1), max(y0,y1)+1):
+        Arr[y]=Arr[y][:x]+'#'+Arr[y][x+1:]
+    x0, y0 = x1, y1
+  
+c=0
+while True:
+  if Arr[0][500-xmin]!='.': 
+    raise Exception('500, 0  is occupied!', Arr)
+  x=500-xmin
+  for y in range(1, ymax):
+    if Arr[y][x]=='.': 
+      continue
+    if x>0:
+      if Arr[y][x-1]=='.':
+        x-=1
+        continue
+    if x<(xmax-xmin-2):
+      if Arr[y][x+1]=='.':
+        x+=1
+        continue
+  
+    Arr[y-1]=(Arr[y-1][:x] if x>0 else '')+'o'+(Arr[y-1][x+1:] if x<(xmax-xmin-1) else '')
+    c+=1
+    break
+  else:
+    break
+  
+print(str(c)+'\n\n'+'\n'.join(Arr))
+```
 
+  24
 
+  ............
+  ............
+  .......o....
+  ......ooo...
+  .....#ooo##.
+  ....o#ooo#..
+  ...###ooo#..
+  .....oooo#..
+  ..o.ooooo#..
+  .#########..
+  ............
 
+```python
+xmin, xmax, ymin, ymax = [
+  min([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[::2]])-1,
+  max([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[::2]])+2,
+  0,
+  max([int(n) for n in day14_input.replace(',',' ').replace('-','').replace('>','').split()[1::2]])+3]
+xmin = min(xmin, 500-ymax-2)
+xmax = max(xmax, 500+ymax+2)
+Arr = [''.join(['.' for x in range(xmax-xmin)]) for y in range(ymax-ymin)]
+for l in day14_input.split('\n')+[str(xmin)+','+str(ymax-1)+' '+str(xmax)+','+str(ymax-1)]:
+  coords = [[int(c.split(',')[0])-xmin, int(c.split(',')[1])-ymin] for c in l.replace('-','').replace('>','').split()]
+  x0, y0 = coords[0]
+  for x1, y1 in coords[1:]:
+    for x in range(min(x0,x1), max(x0,x1)+1):
+      for y in range(min(y0,y1), max(y0,y1)+1):
+        Arr[y]=Arr[y][:x]+'#'+Arr[y][x+1:]
+    x0, y0 = x1, y1
+  
+c=0
+while True:
+  if Arr[0][500-xmin]!='.': 
+    break
+  x=500-xmin
+  for y in range(1, ymax):
+    if Arr[y][x]=='.': 
+      continue
+    if x>0:
+      if Arr[y][x-1]=='.':
+        x-=1
+        continue
+    if x<(xmax-xmin-2):
+      if Arr[y][x+1]=='.':
+        x+=1
+        continue
+  
+    Arr[y-1]=(Arr[y-1][:x] if x>0 else '')+'o'+(Arr[y-1][x+1:] if x<(xmax-xmin-1) else '')
+    c+=1
+    break
+  else:
+    break
+  
+print(str(c)+'\n\n'+'\n'.join(Arr))
+```
+
+  93
+
+  ..............o.............
+  .............ooo............
+  ............ooooo...........
+  ...........ooooooo..........
+  ..........oo#ooo##o.........
+  .........ooo#ooo#ooo........
+  ........oo###ooo#oooo.......
+  .......oooo.oooo#ooooo......
+  ......oooooooooo#oooooo.....
+  .....ooo#########ooooooo....
+  ....ooooo.......ooooooooo...
+  #############################
+
+## Day 15
