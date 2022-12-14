@@ -27,13 +27,17 @@ day01_input = """1000
 print(max([sum([int(y) if y!="" else 0 for y in x.split("\n")]) for x in day01_input.split("\n\n")]))
 ```
 
-    24000
+```python
+24000
+```
 
 ```python
 print(sum(sorted([sum([int(y) if y!="" else 0 for y in x.split("\n")]) for x in day01_input.split("\n\n")])[-3:]))
 ```
 
-    45000
+```python
+45000
+```
 
 ## Day 2
 
@@ -47,13 +51,17 @@ C Z"""
 print(sum([(ord(x[2])-87+(6 if ord(x[2])-ord(x[0])==24 or ord(x[2])-ord(x[0])==21 else 3 if ord(x[2])-ord(x[0])==23 else 0)) for x in day02_input.split("\n")]))
 ```
 
-    15
+```python
+15
+```
 
 ```python
 print(sum([((ord(x[2])-88)*3+(ord(x[0])-65+ord(x[2])-89)%3+1) for x in day02_input.split("\n")]))
 ```
 
-    12
+```python
+12
+```
 
 ## Day 3
 
